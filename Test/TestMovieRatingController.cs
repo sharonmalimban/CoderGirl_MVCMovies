@@ -45,7 +45,7 @@ namespace Test
 
             HtmlNode html = HtmlNode.CreateNode(result.Content);
             HtmlAttribute formAction = html.Attributes.FirstOrDefault(attr => attr.Name.ToLower() == "action");
-            Assert.True(formAction == null || formAction.Value.ToLower() == "/MovieRating/Create");
+            Assert.True(formAction == null || formAction.Value.ToLower() == "/movierating/create");
         }
 
         [Fact]
