@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Movie Ratings";
+}
+
+<h1>Movie Ratings</h1>
+<table>
+    <tr>
+        <th>Movie</th><th>Rating</th>
+    </tr>
+    @foreach(var movieRating in ViewBag.MovieRating)
+    {
+        <tr>
+            <td>@movie.Key</td><td>@movieRating.Value</td>
+        </tr>
+    }
+</table>
