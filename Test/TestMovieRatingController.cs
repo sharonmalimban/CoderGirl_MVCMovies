@@ -35,7 +35,7 @@ namespace Test
             IActionResult result = controller.Create(movieName, rating);
 
             var redirect = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Null(redirect.ActionName);
+            Assert.Equal("Details", redirect.ActionName);
             Assert.Equal(new KeyValuePair<string, object>("movieName", movieName), redirect.RouteValues.First());
             Assert.Equal(new KeyValuePair<string, object>("rating", rating), redirect.RouteValues.Skip(1).Take(1).First());
         }
