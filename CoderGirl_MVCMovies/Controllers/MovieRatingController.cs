@@ -29,6 +29,12 @@ namespace CoderGirl_MVCMovies.Controllers
         /// TODO: Each tr with a movie rating should have an id attribute equal to the id of the movie rating
         public IActionResult Index()
         {
+            List<int> ids = repository.GetIds();
+            var movieRatings = ids.Select(id => repository.GetMovieNameById(id))
+                                                              .Distinct()
+                                                              .Select(name => new KeyValuePair<string, decimal>( name, repository.GetAverageRatingByMovieName(name)))
+                                                              .ToList();
+            ViewBag.MovieRatings = movieRatings;
             return View();
         }
 
@@ -46,6 +52,7 @@ namespace CoderGirl_MVCMovies.Controllers
         [HttpPost]
         public IActionResult Create(string movieName, string rating)
         {
+            repository.SaveRating(movieName, Convert.ToInt32(rating));
             return RedirectToAction(actionName: nameof(Details), routeValues: new { movieName, rating });
         }
 

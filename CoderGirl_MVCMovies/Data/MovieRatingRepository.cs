@@ -24,7 +24,7 @@ namespace CoderGirl_MVCMovies.Data
 
         public string GetMovieNameById(int id)
         {
-            throw new NotImplementedException();
+            return movieRatings.Where(r => r.Id == id).Select(r=> r.Movie).SingleOrDefault();
         }
 
         public int GetRatingById(int id)
