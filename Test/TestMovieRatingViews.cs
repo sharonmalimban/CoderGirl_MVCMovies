@@ -30,7 +30,7 @@ namespace Test
         {
             //add movies to data
             driver.Url = BASE_URL + "/movie/create";
-            driver.FindElementByName("movieName").SendKeys(name);
+            driver.FindElementByName("movie").SendKeys(name);
 
             //navigate to add movie rating page and get elements
             driver.Url = BASE_URL + "/movierating/create";
