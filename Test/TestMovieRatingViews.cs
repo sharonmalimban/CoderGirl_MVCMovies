@@ -26,7 +26,7 @@ namespace Test
         [Theory]
         [InlineData("Star Wars", "5")]
         [InlineData("Princess Bride", "4")]
-        public void TestCreateRating(string name, string rating)
+        public void TestCreateMovieRating(string name, string rating)
         {
             //add movies to data
             driver.Url = BASE_URL + "/movie/create";
