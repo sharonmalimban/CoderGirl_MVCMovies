@@ -29,7 +29,7 @@ namespace Test
         public void TestCreateRating(string name, string rating)
         {
             //add movies to data
-            driver.Url = BASE_URL + "movie/create";
+            driver.Url = BASE_URL + "/movie/create";
             driver.FindElementByName("movieName").SendKeys(name);
 
             //navigate to add movie rating page and get elements

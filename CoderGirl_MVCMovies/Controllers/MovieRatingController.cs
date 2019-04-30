@@ -43,7 +43,6 @@ namespace CoderGirl_MVCMovies.Controllers
         }
 
         // TODO: Save the movie/rating in the MovieRatingRepository before redirecting to the Details page
-        // TODO: Redirect passing only the id of the created movie/rating
         [HttpPost]
         public IActionResult Create(string movieName, string rating)
         {
@@ -56,7 +55,9 @@ namespace CoderGirl_MVCMovies.Controllers
         [HttpGet]
         public IActionResult Details(string movieName, string rating)
         {
-            return Content($"{movieName} has a rating of {rating}");
+            ViewBag.Movie = movieName;
+            ViewBag.Rating = rating;
+            return View();
         }
     }
 }
