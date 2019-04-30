@@ -23,7 +23,6 @@ namespace Test
             IActionResult result = controller.Create();
 
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Equal("Create", viewResult.ViewName);
         }
 
         [Theory]
