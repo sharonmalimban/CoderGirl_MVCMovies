@@ -27,12 +27,22 @@ namespace CoderGirl_MVCMovies.Data
             return movieRatings.Where(r => r.Id == id).Select(r=> r.Movie).SingleOrDefault();
         }
 
+        public List<int> GetMovieRatings()
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetRatingById(int id)
         {
             return movieRatings
                 .Where(m => m.Id == id)
                 .Select(m=> m.Rating)
                 .SingleOrDefault();
+        }
+
+        public int Save(string movieName, int rating)
+        {
+            throw new NotImplementedException();
         }
 
         public int SaveRating(string movieName, int rating)

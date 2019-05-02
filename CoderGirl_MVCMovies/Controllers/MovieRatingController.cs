@@ -26,26 +26,19 @@ namespace CoderGirl_MVCMovies.Controllers
 
        public IActionResult Index()
         {
-            List<int> ids = repository.GetIds();
-            var movieRatings = ids.Select(id => repository.GetMovieNameById(id))
-                                                              .Distinct()
-                                                              .Select(name => new KeyValuePair<string, decimal>( name, repository.GetAverageRatingByMovieName(name)))
-                                                              .ToList();
-            ViewBag.MovieRatings = movieRatings;
+            
             return View();
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Movies = MovieController.movies;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(string movieName, string rating)
         {
-            repository.SaveRating(movieName, Convert.ToInt32(rating));
             return RedirectToAction(actionName: nameof(Details), routeValues: new { movieName, rating });
         }
 
