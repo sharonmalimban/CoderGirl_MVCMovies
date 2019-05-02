@@ -13,5 +13,9 @@ namespace CoderGirl_MVCMovies.Data
         List<Movie> GetMovies();
 
         Movie GetById(int id);
+
+        void Update(Movie movie);
+
+        void Delete(int id);
     }
 }

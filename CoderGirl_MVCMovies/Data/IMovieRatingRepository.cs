@@ -5,30 +5,17 @@ using System.Threading.Tasks;
 
 namespace CoderGirl_MVCMovies.Data
 {
-    // TODO: Implement this interface
+    // TODO: I have provided this for you. Use it or change it as you wish. This is merely a suggested pattern to follow
     public interface IMovieRatingRepository
-    {        
-        /// <summary>
-        /// Given a movieName and rating, saves the rating and returns a unique id > 0.
-        /// If the movie name and/or rating are null or empty, nothing should be saved and it should return 0
-        /// </summary>
-        /// <param name="movieName"></param>
-        /// <param name="rating"></param>
-        /// <returns></returns>
-        int Save(string movieName, int rating);      
+    {
+        //int Save(MovieRating movieRating);
 
-        /// <summary>
-        /// Given a movie name, returns the average rating of of the movie.
-        /// If there are no ratings for the movie, returns an empty list.
-        /// </summary>
-        /// <param name="movieName"></param>
-        /// <returns></returns>
-        decimal GetAverageRatingByMovieName(string movieName);
+        //List<MovieRating> GetMovieRatings();
 
-        /// <summary>
-        /// Returns a list of all the ids of saved movie ratings
-        /// </summary>
-        /// <returns></returns>
-        List<int> GetMovieRatings();
+        //MovieRating GetById(int id);
+
+        //void Update(MovieRating movie);
+
+        //void Delete(int id);
     }
 }

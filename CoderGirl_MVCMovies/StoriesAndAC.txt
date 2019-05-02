@@ -1,0 +1,32 @@
+StoriesAndACForMovieRatings
+
+NOTE: All these should be implemented using models
+NOTE: The model for these stories should have the properities:
+Id
+MovieName
+Rating
+
+
+I want to be able to create a MovieRating
+- When I am on the MovieRating/Index page, I should have a link "Rate A Movie" (id="add-movierating") to /MovieRating/Create
+- Given I am on the /MovieRating/Create page, and given I have created at least one movie, there should be a dropdown which includes the name of every movie created
+- Given I am on the /MovieRating/Create page, there should be a dropdown with ratings options for 1-5
+- Given I am on the /MovieRating/Create and have selected a movie and rating, when I click the button "Rate Movie" I will be redirected to the /MovieRating/Index page
+
+I want to see a list of all MovieRatings
+- Given I am on the /MovieRating/Index page, I should see a table with columns "Movie", "Rating"
+- Given I am on the /MovieRating/Index page, if a movie has not been rated, it should not appear on the table
+- Given I rate a movie once, I should see it appear with the name, rating equal to what I entered
+- Given I rate the same movie X times, its name should appear X times with the corresponding rating. 
+	Example, if I rate "Star Wars" as a 5, then make another rating for "Star Wars" as a 4, and then another as a "5", I should see Star Wars listed 3 times, twice with a rating of 5 and once with a rating of 4
+
+	
+I want to edit a MovieRating
+- Given I am on the /MovieRating/Index page, I should see a link "Edit" next to each MovieRating. 
+- Given I am on the /MovieRating/Index page and I click a "Edit" link, I am taken to /MovieRating/Edit/{id} (where id is the id for the specific MovieRating)
+- Given I am on the /MovieRating/Edit/{id} page, I can select a different rating (but not movie)
+- Given I am on the /MovieRating/Edit/{id} page, if I click the "Update Rating" button, I will be redirected to the /MovieRating/Index page where the updated rating should be shown (but not the old)
+
+I want to delete a MovieRating
+- Given I am on the /MovieRating/Index page, I should see a link "Delete" next to each MovieRating. 
+- Given I am on the /MovieRating/Index page and I click a "Delete" link, the MovieRating should no longer be visible on the /MovieRating/Index page.
