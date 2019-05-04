@@ -1,17 +1,13 @@
 ﻿@model CoderGirl_MVCMovies.Models.MovieRating
 
 @{
-    ViewData["Title"] = "Rate Movie";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Rate a Movie</h1>
+<h1>Edit Rating</h1>
+
 <form method='post'>
-    <select asp-for="Movie">
-        @foreach (var name in ViewBag.MovieNames)
-        {
-            <option>@name</option>
-        }
-    </select>
+    <input readonly asp-for="Movie" value="@Model.Movie" />
     <select asp-for="Rating">
         <option>1</option>
         <option>2</option>
@@ -22,4 +18,7 @@
     <button type='submit'>Rate Movie</button>
 </form>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 

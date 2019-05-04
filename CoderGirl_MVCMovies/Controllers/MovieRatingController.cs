@@ -22,6 +22,7 @@ namespace CoderGirl_MVCMovies.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.MovieNames = movieRespository.GetMovies().Select(m => m.Name).ToList();
             return View();
         }
 
@@ -33,21 +34,14 @@ namespace CoderGirl_MVCMovies.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
-        {
-            MovieRating movieRating = ratingRepository.GetById(id);
-            return View(movieRating);
-        }
-
-        [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Edit(int id)
         {
             MovieRating movieRating = ratingRepository.GetById(id);
             return View(movieRating);
         }
 
         [HttpPost]
-        public IActionResult Update(int id, MovieRating movieRating)
+        public IActionResult Edit(int id, MovieRating movieRating)
         {
             movieRating.Id = id;
             ratingRepository.Update(movieRating);
