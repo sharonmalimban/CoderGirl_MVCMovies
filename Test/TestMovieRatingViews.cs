@@ -40,16 +40,17 @@ namespace Test
             var form = driver.FindElementByTagName("form");
             var submit = form.FindElement(By.TagName("button"));
             Assert.Equal("submit", submit.GetAttribute("type"));
-            var movieSelectInput = new SelectElement(driver.FindElementByName("movieName"));
-            var ratingSelectInput = new SelectElement(driver.FindElementByName("rating"));
+            Assert.Equal("Add Movie", submit.Text);
+            var movieSelectInput = new SelectElement(driver.FindElementByName("Movie"));
+            var ratingSelectInput = new SelectElement(driver.FindElementByName("Rating"));
 
             //make selections for input and submit
             movieSelectInput.SelectByText(name);
             ratingSelectInput.SelectByText(rating);
             submit.Click();
 
-            //verify it redirects with correct query string values
-            Assert.Equal(Uri.EscapeUriString(BASE_URL + $"/movierating/details?movieName={name}&rating={rating}"), driver.Url, true);
+            //verify it redirects to Index
+            Assert.Equal(Uri.EscapeUriString(BASE_URL + $"/movierating"), driver.Url, true);
 
             //navigate to movie rating list page and get table rows
             driver.Url = BASE_URL + "/movierating";

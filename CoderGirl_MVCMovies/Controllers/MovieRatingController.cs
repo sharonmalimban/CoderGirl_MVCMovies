@@ -11,19 +11,6 @@ namespace CoderGirl_MVCMovies.Controllers
     {
         private IMovieRatingRepository repository = RepositoryFactory.GetMovieRatingRepository();
 
-        private string htmlForm = @"
-            <form method='post'>
-                <input name='movieName' />
-                <select name='rating'>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>                    
-                </select>
-                <button type='submit'>Rate it</button>
-            </form>";
-
        public IActionResult Index()
         {
             
