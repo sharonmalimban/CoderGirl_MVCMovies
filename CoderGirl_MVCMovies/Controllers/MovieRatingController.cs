@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoderGirl_MVCMovies.Data;
+using CoderGirl_MVCMovies.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoderGirl_MVCMovies.Controllers
 {
     public class MovieRatingController : Controller
     {
-        private IMovieRatingRepository repository = RepositoryFactory.GetMovieRatingRepository();
+        private IMovieRatingRepository ratingRepository = RepositoryFactory.GetMovieRatingRepository();
+        private IMovieRespository movieRespository = RepositoryFactory.GetMovieRepository();
 
        public IActionResult Index()
         {
-            
-            return View();
+            List<MovieRating> movieRatings = ratingRepository.GetMovieRatings();
+            return View(movieRatings);
         }
 
         [HttpGet]
@@ -24,17 +26,32 @@ namespace CoderGirl_MVCMovies.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string movieName, string rating)
+        public IActionResult Create(MovieRating movieRating)
         {
-            return RedirectToAction(actionName: nameof(Details), routeValues: new { movieName, rating });
+            ratingRepository.Save(movieRating);
+            return RedirectToAction(actionName: nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Details(string movieName, string rating)
+        public IActionResult Details(int id)
         {
-            ViewBag.Movie = movieName;
-            ViewBag.Rating = rating;
-            return View();
+            MovieRating movieRating = ratingRepository.GetById(id);
+            return View(movieRating);
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            MovieRating movieRating = ratingRepository.GetById(id);
+            return View(movieRating);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, MovieRating movieRating)
+        {
+            movieRating.Id = id;
+            ratingRepository.Update(movieRating);
+            return RedirectToAction(actionName: nameof(Index));
         }
     }
 }
