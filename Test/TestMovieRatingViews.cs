@@ -44,7 +44,6 @@ namespace Test
             //get table rows
             var rows = driver.FindElementsByTagName("tr");
             var headers = rows[0].FindElements(By.TagName("th"));
-            var source = driver.PageSource;
 
             //Verify the first row has proper headers
             Assert.Equal("Movie Name", headers[0].Text);
@@ -84,11 +83,18 @@ namespace Test
         [InlineData("Princess Bride", "4")]
         public void TestMovieRatingIndexPage(string name, string rating)
         {
-            //navigate to movie rating list page and get table rows
+            //navigate to movie rating list page
             driver.Url = BASE_URL + "/movierating";
+
+            //verify link to /MovieRating/Create exists and is correct
+            var linkToCreate = driver.FindElementById("add-movierating");
+            Assert.NotNull(linkToCreate);
+            Assert.Equal("a", linkToCreate.TagName);
+            Assert.Equal("Rate a Movie", linkToCreate.Text);
+
+            //get table rows
             var rows = driver.FindElementsByTagName("tr");
             var headers = rows[0].FindElements(By.TagName("th"));
-            var source = driver.PageSource;
 
             //Verify the first row has proper headers
             Assert.Equal("Movie", headers[0].Text);
@@ -96,6 +102,43 @@ namespace Test
 
             //Verify a row contains expected movie/rating combo
             Assert.Contains(rows, row => MovieRatingRowMatches(row, name, rating));
+        }
+
+        [Theory, TestPriority(5)]
+        [InlineData("Star Wars", "5")]
+        [InlineData("Princess Bride", "4")]
+        public void TestDeleteMovieRating(string name, string rating)
+        {
+            //navigate to movie rating list page
+            driver.Url = BASE_URL + "/movierating";
+        }
+
+        [Theory, TestPriority(4)]
+        [InlineData("Star Wars", "5")]
+        [InlineData("Princess Bride", "4")]
+        public void TestEditMovieRating(string name, string rating)
+        {
+            //navigate to movie rating list page
+            driver.Url = BASE_URL + "/movierating";
+
+            //get table rows
+            var rows = driver.FindElementsByTagName("tr");
+            var headers = rows[0].FindElements(By.TagName("th"));
+
+            //get row for test items and click Edit link
+            var testRow = rows.Single(r => MovieRatingRowMatches(r, name, rating));
+            var editLink = testRow.FindElement(By.LinkText("Edit"));
+            var itemId = GetRouteValueForLink(editLink);
+
+            //click Edit and verify we are at correct page
+            editLink.Click();
+            Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
+        }
+
+        private object GetRouteValueForLink(IWebElement editLink)
+        {
+            var action = editLink.GetAttribute("action").ToString();
+            return action.Substring(action.LastIndexOf("/") + 1);
         }
 
         private bool MovieRatingRowMatches(IWebElement row, string name, string rating)
