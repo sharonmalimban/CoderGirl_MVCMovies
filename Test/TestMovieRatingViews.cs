@@ -114,9 +114,9 @@ namespace Test
         }
 
         [Theory, TestPriority(4)]
-        [InlineData("Star Wars", "5")]
-        [InlineData("Princess Bride", "4")]
-        public void TestEditMovieRating(string name, string rating)
+        [InlineData("Star Wars", "5", "3")]
+        [InlineData("Princess Bride", "4", "5")]
+        public void TestEditMovieRating(string name, string rating, string newRating)
         {
             //navigate to movie rating list page
             driver.Url = BASE_URL + "/movierating";
@@ -133,6 +133,26 @@ namespace Test
             //click Edit and verify we are at correct page
             editLink.Click();
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
+
+            //get elements, try to change name and rating
+            var formElement = driver.FindElementByTagName("form");
+            var movieInput = formElement.FindElement(By.Id("Movie"));
+            var ratingInput = new SelectElement(formElement.FindElement(By.Id("Rating")));
+            movieInput.SendKeys("test");
+            ratingInput.SelectByText(newRating);
+
+            //get submit button, verify and click
+            var submitButton = formElement.FindElement(By.TagName("button"));
+            Assert.Equal("Save Changes", submitButton.Text);
+            submitButton.Click();
+
+            //verify it redirects to Index
+            Assert.Equal(Uri.EscapeUriString(BASE_URL + $"/movierating"), driver.Url, true);
+
+            //find row with same id and verify it is updated
+            rows = driver.FindElementsByTagName("tr");
+            var updatedRow = rows.
+
         }
 
         private object GetRouteValueForLink(IWebElement editLink)
