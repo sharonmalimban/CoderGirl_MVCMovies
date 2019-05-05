@@ -133,6 +133,12 @@ namespace Test
             //click Edit and verify we are at correct page
             editLink.Click();
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
+
+
+            //verify it redirects to Index page
+            Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/"), driver.Url.ToLower());
+
+            //Find row for item with same id and verify info is updated
         }
 
         private object GetRouteValueForLink(IWebElement editLink)
