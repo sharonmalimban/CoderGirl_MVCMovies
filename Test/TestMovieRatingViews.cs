@@ -76,7 +76,14 @@ namespace Test
 
             //verify it redirects to Index
             Assert.Equal(Uri.EscapeUriString(BASE_URL + $"/movierating"), driver.Url, true);
+        }
 
+
+        [Theory, TestPriority(3)]
+        [InlineData("Star Wars", "5")]
+        [InlineData("Princess Bride", "4")]
+        public void TestMovieRatingIndexPage(string name, string rating)
+        {
             //navigate to movie rating list page and get table rows
             driver.Url = BASE_URL + "/movierating";
             var rows = driver.FindElementsByTagName("tr");
@@ -84,7 +91,7 @@ namespace Test
             var source = driver.PageSource;
 
             //Verify the first row has proper headers
-            Assert.Equal("Movie",  headers[0].Text);
+            Assert.Equal("Movie", headers[0].Text);
             Assert.Equal("Rating", headers[1].Text);
 
             //Verify a row contains expected movie/rating combo
