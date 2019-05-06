@@ -47,5 +47,12 @@ namespace CoderGirl_MVCMovies.Controllers
             ratingRepository.Update(movieRating);
             return RedirectToAction(actionName: nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            ratingRepository.Delete(id);
+            return RedirectToAction(actionName: nameof(Index));
+        }
     }
 }
