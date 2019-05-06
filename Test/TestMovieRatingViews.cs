@@ -105,12 +105,30 @@ namespace Test
         }
 
         [Theory, TestPriority(5)]
-        [InlineData("Star Wars", "5")]
-        [InlineData("Princess Bride", "4")]
+        [InlineData("Star Wars", "3")]
+        [InlineData("Princess Bride", "5")]
         public void TestDeleteMovieRating(string name, string rating)
         {
             //navigate to movie rating list page
             driver.Url = BASE_URL + "/movierating";
+
+            //get table rows
+            var rows = driver.FindElementsByTagName("tr");
+            var headers = rows[0].FindElements(By.TagName("th"));
+
+            //get row for test items and click Delete link
+            var testRow = rows.Single(r => MovieRatingRowMatches(r, name, rating));
+            var deleteLink = GetDeleteLink(testRow);
+            var itemId = GetRouteValueForLink(deleteLink);
+            deleteLink.Click();
+
+            //Verify no redirect
+            Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating"), driver.Url.ToLower());
+
+            //Verify item is deleted
+            rows = driver.FindElementsByTagName("tr");
+            testRow = rows.Skip(1).SingleOrDefault(r => GetRouteValueForLink(GetDeleteLink(r)) == itemId);
+            Assert.Null(testRow);
         }
 
         [Theory, TestPriority(4)]
@@ -129,9 +147,9 @@ namespace Test
             var testRow = rows.Single(r => MovieRatingRowMatches(r, name, rating));
             var editLink = GetEditLink(testRow);
             var itemId = GetRouteValueForLink(editLink);
+            editLink.Click();
 
             //click Edit and verify we are at correct page
-            editLink.Click();
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
 
             //Change values for name and rating then submit
@@ -153,6 +171,11 @@ namespace Test
         private static IWebElement GetEditLink(IWebElement testRow)
         {
             return testRow.FindElement(By.LinkText("Edit"));
+        }
+
+        private static IWebElement GetDeleteLink(IWebElement testRow)
+        {
+            return testRow.FindElement(By.LinkText("Delete"));
         }
 
         private string GetRouteValueForLink(IWebElement editLink)
