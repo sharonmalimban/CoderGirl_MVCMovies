@@ -150,7 +150,12 @@ namespace Test
             Assert.Contains(rows, row => MovieRatingRowMatches(row, name, newRating));
         }
 
-        private object GetRouteValueForLink(IWebElement editLink)
+        private static IWebElement GetEditLink(IWebElement testRow)
+        {
+            return testRow.FindElement(By.LinkText("Edit"));
+        }
+
+        private string GetRouteValueForLink(IWebElement editLink)
         {
             var action = editLink.GetAttribute("action").ToString();
             return action.Substring(action.LastIndexOf("/") + 1);
