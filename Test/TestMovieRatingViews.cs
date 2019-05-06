@@ -134,16 +134,15 @@ namespace Test
             editLink.Click();
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
 
+            //Find row for item with same id and verify info is updated
 
             //verify it redirects to Index page
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/"), driver.Url.ToLower());
-
-            //Find row for item with same id and verify info is updated
         }
 
         private object GetRouteValueForLink(IWebElement editLink)
         {
-            var action = editLink.GetAttribute("action").ToString();
+            var action = editLink.GetAttribute("href").ToString();
             return action.Substring(action.LastIndexOf("/") + 1);
         }
 
