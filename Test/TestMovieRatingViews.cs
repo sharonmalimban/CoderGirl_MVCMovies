@@ -147,9 +147,9 @@ namespace Test
             var testRow = rows.Single(r => MovieRatingRowMatches(r, name, rating));
             var editLink = GetEditLink(testRow);
             var itemId = GetRouteValueForLink(editLink);
-            editLink.Click();
 
             //click Edit and verify we are at correct page
+            editLink.Click();
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
 
             //Change values for name and rating then submit
