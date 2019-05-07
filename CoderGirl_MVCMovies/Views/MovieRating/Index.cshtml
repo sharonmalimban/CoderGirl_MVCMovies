@@ -12,7 +12,7 @@
     @foreach(var movieRating in Model)
     {
     <tr>
-        <td>@movieRating.Movie</td>
+        <td>@movieRating.MovieName</td>
         <td>@movieRating.Rating</td>
         <td><a asp-action="Edit" asp-route-id="@movieRating.Id">Edit</a></td>
         <td><a asp-action="Delete" asp-route-id="@movieRating.Id">Delete</a></td>
