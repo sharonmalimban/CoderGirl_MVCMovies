@@ -65,7 +65,7 @@ namespace Test
             var submit = form.FindElement(By.TagName("button"));
             Assert.Equal("submit", submit.GetAttribute("type"));
             Assert.Equal("Rate Movie", submit.Text);
-            var movieSelectInput = new SelectElement(driver.FindElementByName("Movie"));
+            var movieSelectInput = new SelectElement(driver.FindElementByName("MovieName"));
             var ratingSelectInput = new SelectElement(driver.FindElementByName("Rating"));
 
             //make selections for input and submit
@@ -153,7 +153,7 @@ namespace Test
             Assert.Contains(Uri.EscapeUriString(BASE_URL + $"/movierating/edit/"), driver.Url.ToLower());
 
             //Change values for name and rating then submit
-            driver.FindElementById("Movie").SendKeys("badName");
+            driver.FindElementById("MovieName").SendKeys("badName");
             new SelectElement(driver.FindElementById("Rating")).SelectByText(newRating);
             var submitButton = driver.FindElementByTagName("form").FindElement(By.TagName("button"));
             Assert.Equal("Update Rating", submitButton.Text);
