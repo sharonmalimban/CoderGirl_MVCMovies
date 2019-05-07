@@ -178,7 +178,7 @@ namespace Test
             return testRow.FindElement(By.LinkText("Delete"));
         }
 
-        private object GetRouteValueForLink(IWebElement editLink)
+        private string GetRouteValueForLink(IWebElement editLink)
         {
             var action = editLink.GetAttribute("href").ToString();
             return action.Substring(action.LastIndexOf("/") + 1);
