@@ -36,12 +36,12 @@ I want to delete a MovieRating
 
 5/7/2019
 
-I want to see average rating and number of ratings on the /Movie/List page
+I want to see average rating and number of ratings on the /Movie/Index page
 - Given I am on the /Movie/Index page, I should see a link "Add New Movie" (id="add-new-movie") 
 - Clicking on "Add New Movie" should take me to /Movie/Create
-- Given I am on the /Movie/List page, I should see a table with Columns in this order: "Name", "Director", "Year", "Average Rating", "Number of Ratings" (Edit and Delete links should follow on each row)
+- Given I am on the /Movie/Index page, I should see a table with Columns in this order: "Name", "Director", "Year", "Average Rating", "Number of Ratings" (Edit and Delete links should follow on each row)
 - The column values for Director should be formatted as "LastName, FirstName" 
-- Each row (<tr id="{movie id} >) should display the correct information for each movie added. If a movie has not been rated, Average Rating should be 'none'. 
+- Each row (<tr id="{movie id}" >) should display the correct information for each movie added. If a movie has not been rated, Average Rating should be 'none'. 
 
 I want to create a rating for a particular movie
 - Given I am on the /Movie/Index page, I should see a link "Rate" next to each Movie. 
