@@ -57,7 +57,7 @@ I want to create a Director (use model with properties: FirstName, LastName, Bir
 
 I want to view a list of Directors
 - Given I am on /Director/Index, I should see a table with columns "Name", "Birth Date", "Nationality"
-- Each row should be an added director with correct info
+- Each row (<tr id="{director id}") should be an added director with correct info
 - The column values for Director should be formatted as "LastName, FirstName"
 
 When I create a movie, I want to choose a director from a dropdown
