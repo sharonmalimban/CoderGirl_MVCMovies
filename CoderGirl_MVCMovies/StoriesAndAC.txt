@@ -41,7 +41,7 @@ I want to see average rating and number of ratings on the /Movie/List page
 - Clicking on "Add New Movie" should take me to /Movie/Create
 - Given I am on the /Movie/List page, I should see a table with Columns in this order: "Name", "Director", "Year", "Average Rating", "Number of Ratings" (Edit and Delete links should follow on each row)
 - The column values for Director should be formatted as "LastName, FirstName" 
-- Each row should display the correct information for each movie added. If a movie has not been rated, Average Rating should be 'none'. 
+- Each row (<tr id="{movie id} >) should display the correct information for each movie added. If a movie has not been rated, Average Rating should be 'none'. 
 
 I want to create a rating for a particular movie
 - Given I am on the /Movie/Index page, I should see a link "Rate" next to each Movie. 
@@ -53,8 +53,18 @@ I want to create a Director (use model with properties: FirstName, LastName, Bir
 - Given I am on /Director/Index, I should see a link "Add a Director" (id="add-new-director"). Clicking on this link takes you to /Director/Create
 - Given I am on page /Director/Create, I should be able to input values for "First Name", "Last Name", "Birth Date" and "Nationality". 
 - Given I am on /Director/Create, there should be a button "Add Director". When I click "Add Director" I should be redirected to /Director/Index
+- stretch goal: If no last name is entered, return Create view with validation error message.
 
 I want to view a list of Directors
 - Given I am on /Director/Index, I should see a table with columns "Name", "Birth Date", "Nationality"
 - Each row should be an added director with correct info
 - The column values for Director should be formatted as "LastName, FirstName"
+
+When I create a movie, I want to choose a director from a dropdown
+- Given I am on /Movie/Create, I want to choose a director from a dropdown
+- The dropdown should be populated with each added director (format of Last Name, First)
+- The value returned by select should be the id of the director
+
+Stretch Goal: Validate Movie name 
+- Given I am on the /Movie/Create page, if I add a movie without entering a name, I will see a validation error message.
+- If I get a validation error message, none of the other info I entered should be erased. 
